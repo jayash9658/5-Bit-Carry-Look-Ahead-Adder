@@ -1,0 +1,97 @@
+Singular C2MOS Characterisation
+
+** NOTE TO SELF : Due to Cgd coupling, q is being bumped above 1.8V to around 2V on the non-sampling egde
+** Shdn't technically be a problem cuz it willl reflush on next egde + buffers everywhere, but to be kept in mind
+
+
+.include TSMC_180nm.txt
+.param lambda=0.09u
+.global gnd vdd
+
+VDD vdd gnd 1.8V
+Vclk clk gnd pwl(0 0V 4.7ns 0V 5ns 1.8V 9.7ns 1.8V 10ns 0V 19.7ns 0V 20ns 1.8V 24.7ns 1.8V 25ns 0V)
+Vd d gnd  pwl(0 0V 1.7ns 0V 2ns 1.8V)
+
+
+.subckt inv out in vdd gnd width_P={8*lambda} width_N={4*lambda}
+
+    M1      out       in       gnd     gnd  CMOSN   W={width_N}   L={2*lambda}
+    + AS={5*width_N*lambda} PS={10*lambda+2*width_N} AD={5*width_N*lambda} PD={10*lambda+2*width_N}
+    M2      out       in       vdd     vdd  CMOSP   W={width_P}   L={2*lambda}
+    + AS={5*width_P*lambda} PS={10*lambda+2*width_P} AD={5*width_P*lambda} PD={10*lambda+2*width_P}
+
+.ends inv
+
+** c2mos positive triggered d flop
+
+.subckt d_flop q d clk clk_bar vdd gnd
+
+    .param width_P= {20*lambda}
+    .param width_N= {10*lambda}
+    
+    ** negative latch l1 :-
+    
+    M1      intermediate1       d       vdd     vdd  CMOSP   W={width_P}   L={2*lambda}
+    + AS={5*width_P*lambda} PS={10*lambda+2*width_P} AD={5*width_P*lambda} PD={10*lambda+2*width_P}
+
+    M2      d_bar       clk       intermediate1     vdd  CMOSP   W={width_P}   L={2*lambda}
+    + AS={5*width_P*lambda} PS={10*lambda+2*width_P} AD={5*width_P*lambda} PD={10*lambda+2*width_P}
+
+    M3      d_bar       clk_bar       intermediate2     gnd  CMOSN   W={width_N}   L={2*lambda}
+    + AS={5*width_N*lambda} PS={10*lambda+2*width_N} AD={5*width_N*lambda} PD={10*lambda+2*width_N}
+
+    M4      intermediate2       d       gnd     gnd  CMOSN   W={width_N}   L={2*lambda}
+    + AS={5*width_N*lambda} PS={10*lambda+2*width_N} AD={5*width_N*lambda} PD={10*lambda+2*width_N}
+
+    ** postive latch l2 :-
+
+    M5      intermediate3       d_bar       vdd     vdd  CMOSP   W={width_P}   L={2*lambda}
+    + AS={5*width_P*lambda} PS={10*lambda+2*width_P} AD={5*width_P*lambda} PD={10*lambda+2*width_P}
+
+    M6      q_temp       clk_bar       intermediate3     vdd  CMOSP   W={width_P}   L={2*lambda}
+    + AS={5*width_P*lambda} PS={10*lambda+2*width_P} AD={5*width_P*lambda} PD={10*lambda+2*width_P}
+
+    M7      q_temp       clk       intermediate4     gnd  CMOSN   W={width_N}   L={2*lambda}
+    + AS={5*width_N*lambda} PS={10*lambda+2*width_N} AD={5*width_N*lambda} PD={10*lambda+2*width_N}
+
+    M8      intermediate4       d_bar       gnd     gnd  CMOSN   W={width_N}   L={2*lambda}
+    + AS={5*width_N*lambda} PS={10*lambda+2*width_N} AD={5*width_N*lambda} PD={10*lambda+2*width_N}
+
+    ** buffer :-
+
+    x_buffer1 q_barr q_temp vdd gnd inv width_P = {20*lambda} width_N = {10*lambda}
+    x_buffer2 q q_barr vdd gnd inv width_P = {20*lambda} width_N = {10*lambda}
+
+.ends d_flop
+
+
+
+x1 clk_bar clk vdd gnd inv width_P = {10*lambda} width_N = {5*lambda}
+x2 q d clk clk_bar vdd gnd d_flop
+x3 q_bar q vdd gnd inv width_P = {20*lambda} width_N = {10*lambda}
+
+
+.control 
+
+    tran 0.01ns 35ns
+
+    set color0=white
+    set color1=black
+
+    plot v(d)
+
+    plot v(x2.q_temp)
+
+    plot v(clk)
+
+    plot v(q)
+
+
+.endc
+
+.end
+
+
+
+
+

@@ -1,0 +1,128 @@
+.include TSMC_180nm.txt
+.include INV.sp
+.include AND.sp
+.include XOR.sp
+.include CARRY2.sp
+.include CARRY3.sp
+.include CARRY4.sp
+.include CARRY5.sp
+.include DFF.sp
+
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+
+
+VA4 A4 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+VA3 A3 gnd PULSE(0 1.8 0 1p 1p 3n 6n)
+VA2 A2 gnd PULSE(0 1.8 0 1p 1p 3n 6n)
+VA1 A1 gnd PULSE(0 1.8 0 1p 1p 3n 6n)
+VA0 A0 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+
+VB4 B4 gnd PULSE(0 1.8 0 1p 1p 3n 6n)
+VB3 B3 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+VB2 B2 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+VB1 B1 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+VB0 B0 gnd PULSE(1.8 0 0 1p 1p 3n 6n)
+
+Vdd vdd gnd 'SUPPLY'
+
+
+VCLK CLK gnd PULSE(0 1.8 1n 1p 1p 2n 4n)
+
+
+
+
+X_DFF_A0 A0_reg A0 CLK vdd gnd d_flop
+X_DFF_A1 A1_reg A1 CLK vdd gnd d_flop
+X_DFF_A2 A2_reg A2 CLK vdd gnd d_flop
+X_DFF_A3 A3_reg A3 CLK vdd gnd d_flop
+X_DFF_A4 A4_reg A4 CLK vdd gnd d_flop
+* Input B registers
+X_DFF_B0 B0_reg B0 CLK vdd gnd d_flop
+X_DFF_B1 B1_reg B1 CLK vdd gnd d_flop
+X_DFF_B2 B2_reg B2 CLK vdd gnd d_flop
+X_DFF_B3 B3_reg B3 CLK vdd gnd d_flop
+X_DFF_B4 B4_reg B4 CLK vdd gnd d_flop
+
+
+
+x_S0 S0 A0_reg B0_reg vdd gnd xor2
+x_G0 G0 A0_reg B0_reg vdd gnd and2
+
+
+
+X_P1 P1 A1_reg B1_reg vdd gnd xor2
+X_G1 G1 A1_reg B1_reg vdd gnd and2
+X_S1 S1 G0 P1 vdd gnd xor2
+X_C2 C2 G1 P1 G0 vdd gnd carry2
+
+
+X_P2 P2 A2_reg B2_reg vdd gnd xor2
+X_G2 G2 A2_reg B2_reg vdd gnd and2
+X_S2 S2 C2 P2 vdd gnd xor2
+X_C3 C3 G2 P2 G1 P1 G0 vdd gnd carry3
+
+
+X_P3 P3 A3_reg B3_reg vdd gnd xor2
+X_G3 G3 A3_reg B3_reg vdd gnd and2
+X_S3 S3 C3 P3 vdd gnd xor2
+X_C4 C4 G3 P3 G2 P2 G1 P1 G0 vdd gnd carry4
+
+
+X_P4 P4 A4_reg B4_reg vdd gnd xor2
+X_G4 G4 A4_reg B4_reg vdd gnd and2
+X_S4 S4 C4 P4 vdd gnd xor2
+X_C5 C5 G4 P4 G3 P3 G2 P2 G1 P1 G0 vdd gnd carry5
+
+
+
+X_DFF_S0 Sum_out0 S0 CLK vdd gnd d_flop
+X_DFF_S1 Sum_out1 S1 CLK vdd gnd d_flop
+X_DFF_S2 Sum_out2 S2 CLK vdd gnd d_flop
+X_DFF_S3 Sum_out3 S3 CLK vdd gnd d_flop
+X_DFF_S4 Sum_out4 S4 CLK vdd gnd d_flop
+X_DFF_C5 Cout_out C5 CLK vdd gnd d_flop
+
+
+
+.tran 1p 6n
+.measure tran t1
++ TRIG v(CLK) VAL=0.9 RISE=1
++ TARG v(S4) VAL=0.9 RISE=1
+
+.measure tran t2
++ TRIG v(CLK) VAL=0.9 RISE=2
++ TARG v(S4) VAL=0.9 FALL=2
+
+.measure tran t3
++ TRIG v(CLK) VAL=0.9 RISE=2
++ TARG v(C4) VAL=0.9 RISE=1
+
+.control
+set hcopypscolor = 0
+set color0=black
+set color1=white
+run
+
+
+plot CLK
+
+plot A4+8 A3+6 A2+4 A1+2 A0
+plot B4+8 B3+6 B2+4 B1+2 B0
+
+
+plot A4_reg+8 A3_reg+6 A2_reg+4 A1_reg+2 A0_reg
+plot B4_reg+8 B3_reg+6 B2_reg+4 B1_reg+2 B0_reg
+
+
+plot C5
+plot S4+8 S3+6 S2+4 S1+2 S0
+
+
+plot Cout_out
+plot Sum_out4+8 Sum_out3+6 Sum_out2+4 Sum_out1+2 Sum_out0
+
+.endc
+.end

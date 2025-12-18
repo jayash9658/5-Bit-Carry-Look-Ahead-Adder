@@ -1,0 +1,43 @@
+CLA
+.include TSMC_180nm.txt
+.include INV.sp
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+VA2 A2 gnd PULSE(1.8 0 0 1n 1n 20n 40n)
+VA1 A1 gnd PULSE(1.8 0 0 1n 1n 40n 80n)
+Vdd vdd gnd 'SUPPLY'
+
+.subckt and2 Y A B vdd gnd
+.param width_N={20*LAMBDA}
+.param width_P={20*LAMBDA}
+
+M1 Y_bar A n1 gnd CMOSN W={width_N} L={LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+M2 n1 B gnd gnd CMOSN W={width_N} L={LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N} AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+M3 Y_bar A vdd vdd CMOSP W={width_P} L={LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+M4 Y_bar B vdd vdd CMOSP W={width_P} L={LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P} AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+x_and2 Y Y_bar vdd gnd inv
+.ends and2
+
+x_and Y A2 A1 vdd gnd and2
+
+
+.tran 10n 200n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=white ** color1 is used to set the grid color of the plot (manual sec:17.7))
+run
+
+plot Y+4 A2+2 A1
+
+.endc
+.end

@@ -1,0 +1,71 @@
+CLA
+.include TSMC_180nm.txt
+.include INV.sp
+.include AND.sp
+.include XOR.sp
+.include CARRY2.sp
+.include CARRY3.sp
+.include CARRY4.sp
+.include CARRY5.sp
+.include DFF.sp
+
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+VA4 A4 gnd PULSE(0 1.8 0 10n 10n 100n 200n)
+VA3 A3 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+VA2 A2 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+VA1 A1 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+VA0 A0 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+
+VB4 B4 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+VB3 B3 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+VB2 B2 gnd PULSE(0 1.8 0 10n 10n 100n 200n)
+VB1 B1 gnd PULSE(0 1.8 0 10n 10n 100n 200n)
+VB0 B0 gnd PULSE(1.8 0 0 10n 10n 100n 200n)
+Vdd vdd gnd 'SUPPLY'
+
+
+x_P0 P0 A0 B0 vdd gnd xor2
+x_G0 G0 A0 B0 vdd gnd and2
+
+X_P1 P1 A1 B1 vdd gnd xor2
+X_G1 G1 A1 B1 vdd gnd and2
+X_S1 S1 G0 P1 vdd gnd xor2
+X_C2 C2 G1 P1 G0 vdd gnd carry2
+
+X_P2 P2 A2 B2 vdd gnd xor2
+X_G2 G2 A2 B2 vdd gnd and2
+X_S2 S2 C2 P2 vdd gnd xor2
+X_C3 C3 G2 P2 G1 P1 G0 vdd gnd carry3
+
+X_P3 P3 A3 B3 vdd gnd xor2
+X_G3 G3 A3 B3 vdd gnd and2
+X_S3 S3 C3 P3 vdd gnd xor2
+X_C4 C4 G3 P3 G2 P2 G1 P1 G0 vdd gnd carry4
+
+X_P4 P4 A4 B4 vdd gnd xor2
+X_G4 G4 A4 B4 vdd gnd and2
+X_S4 S4 C4 P4 vdd gnd xor2
+X_C5 C5 G4 P4 G3 P3 G2 P2 G1 P1 G0 vdd gnd carry5
+
+.tran 10n 200n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=white ** color1 is used to set the grid color of the plot (manual sec:17.7))
+run
+
+plot A3 A2 A1 A0 
+plot B3 B2 B1 B0
+plot C5
+plot S4
+plot S3
+plot S2
+plot S1
+plot P0
+
+.endc
+.end
