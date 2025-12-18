@@ -1,0 +1,120 @@
+* SPICE3 file created from CLA_tst.ext - technology: scmos
+
+.option scale=90n
+
+M1000 a_41_200# A1 gnd Gnd nfet w=10 l=2
++  ad=50p pd=20u as=50p ps=30u
+M1001 P1_bar P1 gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1002 a_23_299# B1 vdd vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1003 a_240_236# G0 gnd Gnd nfet w=20 l=2
++  ad=80p pd=28u as=100p ps=50u
+M1004 A1_bar A1 gnd Gnd nfet w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1005 P1 B1_bar a_23_299# vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1006 C2 C2_bar vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1007 a_186_229# P1 vdd vdd pfet w=40 l=2
++  ad=0.16n pd=48u as=0.16n ps=48u
+M1008 G1 G1_bar vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1009 a_377_209# G0 S1 Gnd nfet w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1010 vdd B1 G1_bar vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1011 P1_bar P1 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1012 vdd G0 a_320_202# vdd pfet w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1013 A1_bar A1 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1014 gnd B0 a_77_99# Gnd nfet w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1015 gnd G1 C2_bar Gnd nfet w=20 l=2
++  ad=100p pd=50u as=80p ps=28u
+M1016 vdd G0 a_186_229# vdd pfet w=40 l=2
++  ad=0.16n pd=48u as=0.2n ps=90u
+M1017 S0 A0_bar a_77_116# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1018 a_77_116# B0_bar gnd Gnd nfet w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1019 B1_bar B1 gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1020 G1_bar B1 a_41_200# Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=20u
+M1021 a_20_92# B0 vdd vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1022 a_77_99# A0 S0 Gnd nfet w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1023 B0_bar B0 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1024 G0 G0_bar gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1025 a_20_92# A0_bar S0 vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1026 S0 B0_bar a_20_92# vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1027 G0 G0_bar vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1028 G0_bar B0 a_49_n7# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1029 G0_bar A0 vdd vdd pfet w=20 l=2
++  ad=60p pd=26u as=100p ps=50u
+M1030 gnd P1 a_377_209# Gnd nfet w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1031 A0_bar A0 gnd Gnd nfet w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1032 S1 G0_bar a_377_226# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1033 a_377_226# P1_bar gnd Gnd nfet w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1034 vdd B0 G0_bar vdd pfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1035 a_320_202# P1 vdd vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1036 a_80_306# A1 P1 Gnd nfet w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1037 a_320_202# G0_bar S1 vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1038 S1 P1_bar a_320_202# vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1039 G0_bar G0 gnd Gnd nfet w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1040 B0_bar B0 gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1041 P1 A1_bar a_80_323# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1042 C2 C2_bar gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1043 B1_bar B1 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1044 vdd A1 a_23_299# vdd pfet w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1045 G1 G1_bar gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1046 A0_bar A0 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1047 C2_bar P1 a_240_236# Gnd nfet w=20 l=2
++  ad=80p pd=28u as=80p ps=28u
+M1048 a_23_299# A1_bar P1 vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1049 G1_bar A1 vdd vdd pfet w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1050 C2_bar G1 a_186_229# vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.16n ps=48u
+M1051 G0_bar G0 vdd vdd pfet w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1052 vdd A0 a_20_92# vdd pfet w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1053 a_49_n7# A0 gnd Gnd nfet w=20 l=2
++  ad=60p pd=26u as=100p ps=50u
+M1054 a_80_323# B1_bar gnd Gnd nfet w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1055 gnd B1 a_80_306# Gnd nfet w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+C0 S0 0 4.28791f **FLOATING
+C1 G0 0 2.23603f **FLOATING
+C2 P1 0 5.46109f **FLOATING
+C3 vdd 0 27.96308f **FLOATING

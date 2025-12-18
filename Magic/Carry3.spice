@@ -1,0 +1,29 @@
+* SPICE3 file created from Carry3.ext - technology: scmos
+
+.option scale=90n
+
+M1000 a_22_2# P1 a_12_2# Gnd nfet w=20 l=2
++  ad=100p pd=50u as=80p ps=28u
+M1001 C3 C3_bar vdd vdd pfet w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1002 a_12_2# P2 C3_bar Gnd nfet w=20 l=2
++  ad=80p pd=28u as=80p ps=28u
+M1003 gnd G0 a_22_2# Gnd nfet w=20 l=2
++  ad=60p pd=26u as=100p ps=50u
+M1004 C3_bar P2 a_2_36# vdd pfet w=40 l=2
++  ad=0.16n pd=48u as=0.16n ps=48u
+M1005 a_22_36# G0 C3_bar vdd pfet w=40 l=2
++  ad=0.12n pd=46u as=0.2n ps=90u
+M1006 a_22_36# P1 C3_bar vdd pfet w=40 l=2
++  ad=0.2n pd=90u as=0.16n ps=48u
+M1007 a_2_36# G2 vdd vdd pfet w=40 l=2
++  ad=0.16n pd=48u as=0.2n ps=90u
+M1008 a_2_36# G1 a_22_36# vdd pfet w=40 l=2
++  ad=0.24n pd=92u as=0.12n ps=46u
+M1009 a_12_2# G1 gnd Gnd nfet w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1010 C3_bar G2 gnd Gnd nfet w=20 l=2
++  ad=80p pd=28u as=100p ps=50u
+M1011 C3 C3_bar gnd Gnd nfet w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 vdd 0 6.19353f **FLOATING

@@ -1,0 +1,49 @@
+* SPICE3 file created from C2.ext - technology: scmos
+
+.option scale=90n
+
+M1000 a_n15_0# P1 vdd vdd CMOSP w=40 l=2
++  ad=0.16n pd=48u as=0.16n ps=48u
+M1001 C2 C2_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1002 C2_bar G1 a_n15_0# vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.16n ps=48u
+M1003 C2_bar P1 a_n8_n34# Gnd CMOSN w=20 l=2
++  ad=80p pd=28u as=80p ps=28u
+M1004 a_n8_n34# G0 gnd Gnd CMOSN w=20 l=2
++  ad=80p pd=28u as=100p ps=50u
+M1005 vdd G0 a_n15_0# vdd CMOSP w=40 l=2
++  ad=0.16n pd=48u as=0.2n ps=90u
+M1006 C2 C2_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1007 gnd G1 C2_bar Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=80p ps=28u
+C0 C2_bar G1 0.01018f
+C1 gnd C2 0
+C2 C2 vdd 0.01479f
+C3 vdd a_n15_0# 0.0272f
+C4 P1 a_n15_0# 0.008f
+C5 C2_bar C2 0.0587f
+C6 G0 a_n15_0# 0.00784f
+C7 gnd P1 0
+C8 P1 vdd 0.05212f
+C9 C2_bar a_n15_0# 0.11547f
+C10 G1 a_n15_0# 0.00153f
+C11 gnd G0 0.00161f
+C12 G0 vdd 0.05214f
+C13 gnd a_n8_n34# 0
+C14 P1 G0 0.05635f
+C15 C2_bar gnd 0.00112f
+C16 gnd G1 0.00161f
+C17 C2_bar vdd 0.05648f
+C18 G1 vdd 0.05053f
+C19 C2_bar P1 0.00153f
+C20 P1 G1 0.05635f
+C21 gnd 0 0.18635f
+C22 C2 0 0.07523f
+C23 C2_bar 0 0.24995f
+C24 a_n15_0# 0 0.06039f
+C25 G1 0 0.18806f
+C26 P1 0 0.1783f
+C27 G0 0 0.18806f
+C28 vdd 0 4.281f
