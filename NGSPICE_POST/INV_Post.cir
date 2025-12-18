@@ -1,0 +1,40 @@
+.include TSMC_180nm.txt
+
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+
+.option scale=90n
+
+
+Vvin Vin gnd PULSE(0 1.8 0 10n 10n 100n 200n)
+Vdd vdd gnd 'SUPPLY'
+
+M1000 Vout Vin vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1001 Vout Vin gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 Vout gnd 0
+C1 Vout Vin 0.0587f
+C2 Vin vdd 0.03699f
+C3 Vin gnd 0
+C4 Vout vdd 0.01479f
+C5 gnd 0 0.03709f
+C6 Vout 0 0.07523f
+C7 Vin 0 0.16133f
+C8 vdd 0 1.18383f
+
+
+.tran 1n 200n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=white ** color1 is used to set the grid color of the plot (manual sec:17.7))
+run
+
+plot Vout
+
+.endc
+.end

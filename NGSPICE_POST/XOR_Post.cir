@@ -1,0 +1,88 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+VA A gnd PULSE(1.8 0 0 1n 1n 20n 40n)
+VB B gnd PULSE(1.8 0 0 1n 1n 40n 80n)
+Vdd vdd gnd 'SUPPLY'
+
+
+
+.option scale=90n
+
+M1000 B_bar B vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1001 A_bar A vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1002 gnd B a_7_6# Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1003 p A_bar v0 vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1004 B_bar B gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1005 v0 A_bar a_24_6# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1006 A_bar A gnd Gnd CMOSN w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1007 a_7_6# A v0 Gnd CMOSN w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1008 p B vdd vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1009 a_24_6# B_bar gnd Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1010 vdd A p vdd CMOSP w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1011 v0 B_bar p vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+C0 B_bar A 0.22378f
+C1 p A 0.00809f
+C2 B A 0.33344f
+C3 A_bar v0 0.01043f
+C4 A_bar gnd 0
+C5 B_bar v0 0.04128f
+C6 B_bar gnd 0.00161f
+C7 A_bar vdd 0.2091f
+C8 p v0 0
+C9 B_bar vdd 0.24622f
+C10 B v0 0.0076f
+C11 B gnd 0.00234f
+C12 p vdd 0.03459f
+C13 a_7_6# v0 0
+C14 a_7_6# gnd 0
+C15 v0 A 0.00768f
+C16 gnd A 0.00161f
+C17 B vdd 0.08517f
+C18 A_bar B_bar 0.13899f
+C19 v0 a_24_6# 0
+C20 a_24_6# gnd 0
+C21 A_bar p 0.00825f
+C22 A vdd 0.09276f
+C23 B A_bar 0.03102f
+C24 B_bar p 0.39035f
+C25 v0 gnd 0
+C26 B B_bar 0.15433f
+C27 A_bar A 0.2192f
+C28 B p 0.00825f
+C29 v0 vdd 0.07817f
+C30 gnd 0 0.38381f 
+C31 v0 0 0.16434f 
+C32 p 0 0.11038f 
+C33 B_bar 0 0.30773f 
+C34 A_bar 0 0.55832f 
+C35 B 0 1.07492f 
+C36 A 0 0.58702f 
+C37 vdd 0 6.11095f 
+
+.tran 1n 80n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black 
+set color1=white
+run
+
+plot v0+4 B+2 A
+
+.endc
+.end

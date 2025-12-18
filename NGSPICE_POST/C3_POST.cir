@@ -1,0 +1,56 @@
+.include TSMC_180nm.txt
+
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+.option scale=90n
+
+
+VP2 P2 gnd PULSE(1.8 0 0 1n 1n 10n 20n)
+VP1 P1 gnd PULSE(1.8 0 0 1n 1n 20n 40n)
+VG0 G0 gnd PULSE(1.8 0 0 1n 1n 40n 80n)
+VG1 G1 gnd PULSE(1.8 0 0 1n 1n 80n 160n)
+VG2 G2 gnd PULSE(1.8 0 0 1n 1n 160n 320n)
+Vdd vdd gnd 'SUPPLY'
+
+
+
+M1000 a_22_2# P1 a_12_2# Gnd CMOSN w=180 l=18
++  ad=8.1n pd=0.45m as=6.48n ps=0.252m
+M1001 C3 C3_bar vdd vdd CMOSP w=180 l=18
++  ad=8.1n pd=0.45m as=8.1n ps=0.45m
+M1002 a_12_2# P2 C3_bar Gnd CMOSN w=180 l=18
++  ad=6.48n pd=0.252m as=6.48n ps=0.252m
+M1003 gnd G0 a_22_2# Gnd CMOSN w=180 l=18
++  ad=4.86n pd=0.234m as=8.1n ps=0.45m
+M1004 C3_bar P2 a_2_36# vdd CMOSP w=360 l=18
++  ad=12.96n pd=0.432m as=12.96n ps=0.432m
+M1005 a_22_36# G0 C3_bar vdd CMOSP w=360 l=18
++  ad=9.72n pd=0.414m as=16.2n ps=0.81m
+M1006 a_22_36# P1 C3_bar vdd CMOSP w=360 l=18
++  ad=16.2n pd=0.81m as=12.96n ps=0.432m
+M1007 a_2_36# G2 vdd vdd CMOSP w=360 l=18
++  ad=12.96n pd=0.432m as=16.2n ps=0.81m
+M1008 a_2_36# G1 a_22_36# vdd CMOSP w=360 l=18
++  ad=19.44n pd=0.828m as=9.72n ps=0.414m
+M1009 a_12_2# G1 gnd Gnd CMOSN w=180 l=18
++  ad=8.1n pd=0.45m as=4.86n ps=0.234m
+M1010 C3_bar G2 gnd Gnd CMOSN w=180 l=18
++  ad=6.48n pd=0.252m as=8.1n ps=0.45m
+M1011 C3 C3_bar gnd Gnd CMOSN w=90 l=18
++  ad=4.05n pd=0.27m as=4.05n ps=0.27m
+C0 vdd 0 6.19353f
+
+.tran 1n 320n
+
+.control
+set hcopypscolor = 0 
+set color0=black 
+set color1=white 
+run
+
+plot C3+10 G2+8 P2+6 G1+4 P1+2 G0
+
+.endc
+.end

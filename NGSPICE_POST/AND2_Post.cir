@@ -1,0 +1,53 @@
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+.option scale=90n
+
+VA A gnd PULSE(1.8 0 0 1n 1n 20n 40n)
+VB B gnd PULSE(1.8 0 0 1n 1n 40n 80n)
+Vdd vdd gnd 'SUPPLY'
+
+M1000 a_n7_n22# B gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=20u as=50p ps=30u
+M1001 Y_bar B vdd vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1002 Y Y_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1003 vdd A Y_bar vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1004 Y_bar A a_n7_n22# Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=20u
+M1005 Y Y_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+C0 vdd Y 0.01479f
+C1 B gnd 0
+C2 gnd Y_bar 0
+C3 B Y_bar 0.00218f
+C4 Y gnd 0
+C5 Y Y_bar 0.0587f
+C6 Y_bar a_n7_n22# 0
+C7 vdd A 0.0978f
+C8 vdd B 0.0978f
+C9 A Y_bar 0.00994f
+C10 vdd Y_bar 0.05425f
+C11 gnd 0 0.07419f
+C12 Y 0 0.07523f
+C13 Y_bar 0 0.25077f
+C14 A 0 0.20467f
+C15 B 0 0.20467f
+C16 vdd 0 2.56609f
+
+
+.tran 1n 200n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black
+set color1=white 
+run
+
+plot Y+4 A+2 B
+
+.endc
+.end

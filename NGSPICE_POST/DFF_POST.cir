@@ -1,0 +1,82 @@
+.include TSMC_180nm.txt
+.global vdd gnd
+.option scale=90n
+Vdd vdd 0 1.8
+Vclk clk 0 pulse(0 1.8 0 100p 100p 10n 20n)
+Vdata D 0 pwl(0 0 12n 0 12.1n 1.8 32n 1.8 32.1n 0 60n 0)
+M1000 l1 D vdd vdd CMOSP w=20 l=2
++  ad=60p pd=26u as=100p ps=50u
+M1001 Q_bar clk l3 Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=30p ps=16u
+M1002 l2 X Y Gnd CMOSN w=10 l=2
++  ad=30p pd=16u as=50p ps=30u
+M1003 X clk l1 vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1004 Q Q_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1005 l3 Y gnd Gnd CMOSN w=10 l=2
++  ad=30p pd=16u as=50p ps=30u
+M1006 X D gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1007 Y clk vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1008 Q Q_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1009 Q_bar Y vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1010 gnd clk l2 Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=30p ps=16u
+C0 clk Y 0.03159f
+C1 l2 Y 0
+C2 vdd X 0.01725f
+C3 clk Q_bar 0
+C4 D clk 0.11678f
+C5 vdd Y 0.0286f
+C6 vdd Q_bar 0.03386f
+C7 vdd D 0.08759f
+C8 vdd l1 0
+C9 vdd clk 0.33388f
+C10 Q gnd 0
+C11 X gnd 0
+C12 Y gnd 0.00175f
+C13 Q_bar Q 0.05983f
+C14 l3 gnd 0
+C15 Y X 0.22972f
+C16 Q_bar gnd 0.00164f
+C17 D gnd 0.00153f
+C18 D X 0.00351f
+C19 l1 X 0
+C20 clk gnd 0.40146f
+C21 Y Q_bar 0.00206f
+C22 l2 gnd 0
+C23 clk X 0.06868f
+C24 vdd Q 0.00806f
+C25 gnd 0 0.32996f  
+C26 Q 0 0.10349f  
+C27 X 0 0.17941f  
+C28 Q_bar 0 0.28741f  
+C29 Y 0 0.28701f  
+C30 clk 0 0.59967f  
+C31 D 0 0.20166f  
+C32 vdd 0 3.10879f  
+
+
+.tran 0.01n 60n
+.measure tran tcpq
++ TRIG v(clk) VAL=0.9 RISE=2
++ TARG v(Q) VAL=0.9 RISE=1
+
+.measure tran tsetup
++ TRIG v(D) VAL=0.9 RISE=1
++ TARG v(X) VAL=0.9 FALL=1
+
+.measure tran thold
++ TRIG v(Y) VAL=0.9 FALL=1
++ TARG v(X) VAL=0.9 RISE=1
+
+.control
+run
+plot clk D+2 Q+4
+.endc
+
+.end

@@ -1,0 +1,154 @@
+CLA_2_POST
+.include TSMC_180nm.txt
+
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+.option scale=90n
+
+
+VA0 A0 gnd PULSE(0 1.8 10n 100p 100p 100n 200n)
+
+VB0 B0 gnd PULSE(0 1.8 10n 100p 100p 200n 400n)
+
+VA1 A1 gnd PULSE(0 1.8 10n 100p 100p 400n 800n)
+
+VB1 B1 gnd PULSE(0 1.8 10n 100p 100p 800n 1600n)
+
+
+Vdd vdd gnd 'SUPPLY'
+
+.option scale=90n
+
+M1000 vdd G0 a_324_229# vdd CMOSP w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1001 a_n3_144# A0 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1002 a_n3_343# A1 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1003 a_86_321# A1 P1 Gnd CMOSN w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1004 vdd A1 G1_bar vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1005 a_324_229# a_292_258# S1 vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1006 G0_bar A0 vdd vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1007 a_198_292# P1 vdd vdd CMOSP w=40 l=2
++  ad=0.16n pd=48u as=0.16n ps=48u
+M1008 a_13_335# B1 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1009 C2 C2_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1010 vdd A1 a_29_314# vdd CMOSP w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1011 a_51_212# B1 gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=20u as=50p ps=30u
+M1012 a_381_253# a_308_250# gnd Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1013 G1 G1_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1014 gnd P1 a_381_236# Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1015 a_13_136# B0 gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1016 a_252_299# G0 gnd Gnd CMOSN w=20 l=2
++  ad=80p pd=28u as=100p ps=50u
+M1017 a_86_122# A0 S0 Gnd CMOSN w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1018 a_292_258# G0 gnd Gnd CMOSN w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1019 S1 a_308_250# a_324_229# vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1020 a_324_229# P1 vdd vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1021 gnd B0 a_86_122# Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1022 S0 a_n3_144# a_86_139# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1023 a_86_139# a_13_136# gnd Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1024 a_86_338# a_13_335# gnd Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=60p ps=26u
+M1025 gnd B1 a_86_321# Gnd CMOSN w=20 l=2
++  ad=60p pd=26u as=70p ps=27u
+M1026 vdd A0 a_29_115# vdd CMOSP w=40 l=2
++  ad=0.14n pd=47u as=0.2n ps=90u
+M1027 P1 a_n3_343# a_86_338# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1028 a_29_115# B0 vdd vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1029 gnd G1 C2_bar Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=80p ps=28u
+M1030 a_29_115# a_n3_144# S0 vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1031 S0 a_13_136# a_29_115# vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1032 vdd B0 G0_bar vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1033 P1 a_13_335# a_29_314# vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.12n ps=46u
+M1034 a_29_314# B1 vdd vdd CMOSP w=40 l=2
++  ad=0.12n pd=46u as=0.14n ps=47u
+M1035 a_308_250# P1 gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1036 a_29_314# a_n3_343# P1 vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.12n ps=46u
+M1037 G1_bar A1 a_51_212# Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=20u
+M1038 a_13_136# B0 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1039 G0 G0_bar vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1040 a_56_13# A0 gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=20u as=50p ps=30u
+M1041 a_292_258# G0 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1042 G1_bar B1 vdd vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1043 vdd G0 a_198_292# vdd CMOSP w=40 l=2
++  ad=0.16n pd=48u as=0.2n ps=90u
+M1044 C2 C2_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1045 a_308_250# P1 vdd vdd CMOSP w=20 l=2
++  ad=0.12n pd=52u as=0.12n ps=52u
+M1046 C2_bar P1 a_252_299# Gnd CMOSN w=20 l=2
++  ad=80p pd=28u as=80p ps=28u
+M1047 a_n3_144# A0 gnd Gnd CMOSN w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1048 a_n3_343# A1 gnd Gnd CMOSN w=10 l=2
++  ad=60p pd=32u as=50p ps=30u
+M1049 G1 G1_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1050 C2_bar G1 a_198_292# vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.16n ps=48u
+M1051 a_381_236# G0 S1 Gnd CMOSN w=20 l=2
++  ad=70p pd=27u as=100p ps=50u
+M1052 a_13_335# B1 gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=60p ps=32u
+M1053 G0_bar B0 a_56_13# Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=20u
+M1054 S1 a_292_258# a_381_253# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=60p ps=26u
+M1055 G0 G0_bar gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+C0 S0 0 4.23478f 
+C1 G0 0 2.33943f 
+C2 P1 0 5.42413f 
+C3 vdd 0 27.46028f
+
+
+.tran 1n 1600n
+
+.control
+set hcopypscolor = 0 *White background for saving plots
+set color0=black ** color0 is used to set the background of the plot (manual sec:17.7))
+set color1=white ** color1 is used to set the grid color of the plot (manual sec:17.7))
+run
+
+plot A1+6 A0+4 B1+2 B0
+plot P1+6 G1+4 G0_bar+2 G0
+plot C2+4 S1+2 S0
+
+.endc
+.end
